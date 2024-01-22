@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Email() {
+export default function Email({status}) {
     const { data, setData, post, processing, errors, reset } = useForm({
         subject: '',
         to: '',
