@@ -18,7 +18,9 @@ use Microsoft\Graph\Generated\Models\Message;
 class EmailController extends Controller
 {
     public function mail(){
-        return Inertia::render("Mail/Email");
+        return Inertia::render("Mail/Email", [
+            'status' => session('message')
+        ]);
     }
 
     public function sendEmail(Request $request){
@@ -30,7 +32,7 @@ class EmailController extends Controller
         // Send the email
         Mail::to($to)->send(new SendEmail($subject, $body));
 
-        return redirect(route('mail'))->with(['success' => true, 'message' => 'Mail sent!']);
+        return redirect(route('mail'))->with(['status' => true, 'message' => 'Mail sent!']);
         // // Uses https://graph.microsoft.com/.default scopes if none are specified
         // $tokenRequestContext = new ClientCredentialContext(
         //     env('MS_GRAPH_TENANT_ID'),
